@@ -1,5 +1,7 @@
 # flask-app.py
-from flask import Flask, request
+from flask import Flask, request,jsonify,g,make_response
+from flask_expects_json import expects_json
+from jsonschema import ValidationError
 import json
 
 # create a Flask instance
@@ -22,6 +24,35 @@ description =   """
 				
 # Routes refer to url'
 # our root url '/' will show our html description
+
+
+
+@app.errorhandler(400)
+def bad_request(error):
+    if isinstance(error.description, ValidationError):
+        original_error = error.description
+        return make_response(jsonify({'error': original_error.message}), 400)
+    # handle other "Bad Request"-errors
+    return error
+
+schema = {
+    'type': 'object',
+    'properties': {
+        'email': {'type': 'string'},
+        'password': {'type': 'string'}
+    },
+    'required': ['email', 'password']
+}
+
+@app.route('/login', methods=['POST'])
+@expects_json(schema)
+def login():
+    # if payload is invalid, request will be aborted with error code 400
+    # if payload is valid it is stored in g.data
+
+    resp = jsonify(g.data)
+    return resp, 200
+
 @app.route('/', methods=['GET'])
 def hello_world():
     # return a html format string that is rendered in the browser
