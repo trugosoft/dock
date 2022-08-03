@@ -14,3 +14,5 @@ docker run -d -p 8081:5000 sa***/flask-api:1.0.0
 docker run -d -p 8080:5000sa***/flask-api:1.0.0
 docker push sa***/nginx-flask-app:1.0.4
 docker run -d -p 8082:80 sathyamurthyb4u/nginx-flask-app:1.0.4
+docker run -d --name postgres -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=password -p 5432:5432 postgres
+docker run -d --name mongodb -v mddata:/data/db -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=username -e MONGO_INITDB_ROOT_PASSWORD=password
