@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/pachecoio/go-todo/config"
+	"github.com/sathyamurthyb4u/go-todo/config"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"

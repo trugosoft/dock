@@ -1,6 +1,6 @@
-module github.com/pachecoio/go-todo
+module github.com/sathyamurthyb4u/go-todo
 
-go 1.13
+go 1.17
 
 require (
 	github.com/gofiber/fiber v1.14.6

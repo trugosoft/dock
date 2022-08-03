@@ -5,8 +5,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/pachecoio/go-todo/database"
-	"github.com/pachecoio/go-todo/todo"
+	"github.com/sathyamurthyb4u/go-todo/database"
+	"github.com/sathyamurthyb4u/go-todo/todo"
 )
 
 func main() {

@@ -33,10 +33,14 @@ RUN go mod download \
 
 RUN go build -o todo -a .
 
-FROM alpine:latest as prod
 
+FROM alpine:latest as prod
 COPY --from=builder /app/todo /usr/local/bin/todo
-RUN chmod a+x /usr/local/bin/todo
+COPY .env /usr/local/bin/todo/.env
+RUN chmod -R +x /usr/local/bin/todo
+
+#RUN ls -al /usr/local/bin/todo
+#RUN cat /usr/local/bin/todo/.env
 EXPOSE 5000
 
-ENTRYPOINT ["/usr/local/bin/todo"]
+ENTRYPOINT ["/usr/local/bin/todo/go-todo"]
