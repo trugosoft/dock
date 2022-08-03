@@ -5,6 +5,8 @@ ENV GO111MODULE="on"
 ENV GOOS="linux"
 ENV CGO_ENABLED=0
 
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64
+
 RUN apk update \
     && apk add --no-cache \
     ca-certificates \
@@ -34,6 +36,7 @@ RUN go build -o todo -a .
 FROM alpine:latest as prod
 
 COPY --from=builder /app/todo /usr/local/bin/todo
+RUN chmod a+x /usr/local/bin/todo
 EXPOSE 5000
 
 ENTRYPOINT ["/usr/local/bin/todo"]

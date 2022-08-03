@@ -8,9 +8,9 @@ docker login -u sathyamurthyb4u
 docker push dockerdemo:latest
 docker tag dockerdemo:latest docker-demo:latest
 docker tag dockerdemo:latest dockerdemo:latest
-docker build -t sa******/ngnix-flask-app:1.0.4 .
-docker run -d -p 8081:5000 sathyamurthyb4u/flask-api
-docker run -d -p 8081:5000 sathyamurthyb4u/flask-api:1.0.0
-docker run -d -p 8080:5000 sathyamurthyb4u/flask-api:1.0.0
+docker build -t sa***/ngnix-flask-app:1.0.4 .
+docker run -d -p 8081:5000 sa***/flask-api
+docker run -d -p 8081:5000 sa***/flask-api:1.0.0
+docker run -d -p 8080:5000sa***/flask-api:1.0.0
 docker push sa***/nginx-flask-app:1.0.4
 docker run -d -p 8082:80 sathyamurthyb4u/nginx-flask-app:1.0.4
