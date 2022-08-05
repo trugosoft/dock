@@ -5,10 +5,10 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/sathyamurthyb4/fullstack/api/auth"
-	"github.com/sathyamurthyb4/fullstack/api/models"
-	"github.com/sathyamurthyb4/fullstack/api/responses"
-	"github.com/sathyamurthyb4/fullstack/api/utils/formaterror"
+	"github.com/sathyamurthyb4u/fullstack/api/auth"
+	"github.com/sathyamurthyb4u/fullstack/api/models"
+	"github.com/sathyamurthyb4u/fullstack/api/responses"
+	"github.com/sathyamurthyb4u/fullstack/api/utils/formaterror"
 	"golang.org/x/crypto/bcrypt"
 )
 

@@ -4,7 +4,7 @@ FROM golang:alpine as builder
 # ENV GO111MODULE=on
 
 # Add Maintainer info
-LABEL maintainer="Steven Victor <chikodi543@gmail.com>"
+LABEL maintainer="Trugo (Sathya)"
 
 # Install git.
 # Git is required for fetching the dependencies.
@@ -23,6 +23,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
+#RUN go build -o todo -a .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
 
 # Start a new stage from scratch
