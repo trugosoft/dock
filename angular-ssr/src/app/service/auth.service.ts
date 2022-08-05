@@ -24,6 +24,14 @@ export class AuthService {
   }
 
   login() {
+    return this.httpClient.post('http://localhost:8083/login',{'email':'sathya@gmail.com','password':'password'}).pipe(map((response: any) => {
+      // login successful if there's a Spring Session token in the response
+      if (response.body ||response.token) {
+        this.cookieService.set('token', response.token);
+      }
+      return response;
+    }));
+
     return this.httpClient.get('http://localhost:3000/login').pipe(map((response: any) => {
       // login successful if there's a Spring Session token in the response
       if (response.body ||response.token) {
