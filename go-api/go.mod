@@ -1,6 +1,6 @@
-module github.com/victorsteven/fullstack
+module github.com/sathyamurthyb4u/fullstack
 
-go 1.12
+go 1.17
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.3.3
