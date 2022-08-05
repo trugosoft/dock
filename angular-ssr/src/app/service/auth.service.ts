@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient,Headers} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {map} from 'rxjs/operators';
 import {SsrCookieService} from 'ngx-cookie-service-ssr';
@@ -24,7 +24,10 @@ export class AuthService {
   }
 
   login() {
-    return this.httpClient.post('http://192.168.1.23:8083/login',{'email':'sathya@gmail.com','password':'password'}).pipe(map((response: any) => {
+    const headers = new Headers();
+    headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    headers.append('Access-Control-Allow-Origin', '*');
+    return this.httpClient.post('http://192.168.1.23:8083/login',{'email':'sathya@gmail.com','password':'password'}, {headers: headers}).pipe(map((response: any) => {
       // login successful if there's a Spring Session token in the response
       if (response.body ||response.token) {
         this.cookieService.set('token', response.token);
