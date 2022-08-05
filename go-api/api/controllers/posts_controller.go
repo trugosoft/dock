@@ -55,6 +55,15 @@ func (server *Server) CreatePost(w http.ResponseWriter, r *http.Request) {
 
 func (server *Server) GetPosts(w http.ResponseWriter, r *http.Request) {
 
+	tokenID, err := auth.ExtractTokenID(r)
+	if err != nil {
+		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
+		return
+	}
+	if tokenID != 0 {
+		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
+		return
+	}	
 	post := models.Post{}
 
 	posts, err := post.FindAllPosts(server.DB)
@@ -67,6 +76,15 @@ func (server *Server) GetPosts(w http.ResponseWriter, r *http.Request) {
 
 func (server *Server) GetPost(w http.ResponseWriter, r *http.Request) {
 
+	tokenID, err := auth.ExtractTokenID(r)
+	if err != nil {
+		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
+		return
+	}
+	if tokenID != 0 {
+		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
+		return
+	}
 	vars := mux.Vars(r)
 	pid, err := strconv.ParseUint(vars["id"], 10, 64)
 	if err != nil {
