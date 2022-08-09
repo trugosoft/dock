@@ -7,14 +7,14 @@ import (
 	"github.com/sathyamurthyb4u/fullstack/api/auth"
 	"github.com/sathyamurthyb4u/fullstack/api/responses"
 )
-func setupResponse(w *http.ResponseWriter, req *http.Request) {
+/*func setupResponse(w *http.ResponseWriter, req *http.Request) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
     (*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-    (*w).Header().Set("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
-}
+    (*w).Header().Set("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Access-Control-Allow-Origin, Authorization")
+}*/
 func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		setupResponse(&w, r)
+		//setupResponse(&w, r)
 		w.Header().Set("Content-Type", "application/json")
 		next(w, r)
 	}
@@ -22,7 +22,6 @@ func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {
 
 func SetMiddlewareAuthentication(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		setupResponse(&w, r)
 		err := auth.TokenValid(r)
 		if err != nil {
 			responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
