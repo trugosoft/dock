@@ -23,10 +23,10 @@ export class AuthService {
     this.router.navigate(['login'])
   }
 
-  login() {
+  login(data:any) {
     let headers = new HttpHeaders();
     headers = headers.set('Access-Control-Allow-Origin', '*');
-    return this.httpClient.post('http://demo.testrs.com:8083/login',{'email':'sathya@gmail.com','password':'password'},{headers: headers}).pipe(map((response: any) => {
+    return this.httpClient.post('http://demo.testrs.com:8083/login',data,{headers: headers}).pipe(map((response: any) => {
       // login successful if there's a Spring Session token in the response
       if (response.body ||response.token) {
         this.cookieService.set('token', response.token);

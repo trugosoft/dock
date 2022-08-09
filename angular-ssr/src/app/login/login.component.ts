@@ -11,8 +11,8 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginFormGroup = this.fb.group({
-    username: ['admin', Validators.required],
-    password: ['admin', Validators.required],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   constructor(private fb: UntypedFormBuilder,
@@ -24,9 +24,11 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser() {
-    this.authService.login().subscribe(data => {
-      console.log(data);
-      this.router.navigateByUrl('/home');
-    })
+    if(this.loginFormGroup.valid){
+      this.authService.login(this.loginFormGroup.value).subscribe(data => {
+        this.router.navigateByUrl('/home');
+      })
+    }
+
   }
 }
