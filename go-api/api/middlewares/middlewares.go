@@ -15,9 +15,6 @@ func setupResponse(w *http.ResponseWriter, req *http.Request) {
 func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		setupResponse(&w, r)
-		if (*r).Method == "OPTIONS" {
-			return
-		}
 		w.Header().Set("Content-Type", "application/json")
 		next(w, r)
 	}
@@ -26,9 +23,6 @@ func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {
 func SetMiddlewareAuthentication(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		setupResponse(&w, r)
-		if (*r).Method == "OPTIONS" {
-			return
-		}
 		err := auth.TokenValid(r)
 		if err != nil {
 			responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
