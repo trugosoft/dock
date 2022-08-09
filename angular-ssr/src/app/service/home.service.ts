@@ -12,6 +12,6 @@ export class HomeService {
   }
 
   getUserInfo(): Observable<User> {
-    return this.httpClient.get<User>('http://localhost:3000/home');
+    return this.httpClient.get<User>('http://demo.testrs.com:8083/');
   }
 }

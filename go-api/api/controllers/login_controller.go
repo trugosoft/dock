@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-
 	"github.com/sathyamurthyb4u/fullstack/api/auth"
 	"github.com/sathyamurthyb4u/fullstack/api/models"
 	"github.com/sathyamurthyb4u/fullstack/api/responses"
@@ -40,7 +39,10 @@ func (server *Server) Login(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnprocessableEntity, formattedError)
 		return
 	}
-	responses.JSON(w, http.StatusOK, token)
+	resJson := map[string]interface{}{
+		"token": token,
+	}
+	responses.JSON(w, http.StatusOK, resJson)
 }
 
 func (server *Server) SignIn(email, password string) (string, error) {
