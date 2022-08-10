@@ -43,9 +43,18 @@ schema = {
     },
     'required': ['email', 'password']
 }
-
+over_all_schemas = {
+    "login" :{
+        'type': 'object',
+        'properties': {
+            'email': {'type': 'string'},
+            'password': {'type': 'string'}
+        },
+        'required': ['email', 'password']
+    }
+}
 @app.route('/login', methods=['POST'])
-@expects_json(schema)
+@expects_json(over_all_schemas['login'])
 def login():
     # if payload is invalid, request will be aborted with error code 400
     # if payload is valid it is stored in g.data
