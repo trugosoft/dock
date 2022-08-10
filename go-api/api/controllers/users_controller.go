@@ -48,11 +48,12 @@ func (server *Server) CreateUser(w http.ResponseWriter, r *http.Request) {
 
 func (server *Server) GetUsers(w http.ResponseWriter, r *http.Request) {
 	tokenID, err := auth.ExtractTokenID(r)
+	//fmt.Println("User ID :: " , tokenID)
 	if err != nil {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 		return
 	}
-	if tokenID != 0 {
+	if tokenID == 0 {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 		return
 	}
@@ -72,6 +73,7 @@ func (server *Server) GetUser(w http.ResponseWriter, r *http.Request) {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 		return
 	}
+	
 	if tokenID != 0 {
 		responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))
 		return
