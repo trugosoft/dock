@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Description>Simple-project project</Description>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SteeltoeVersion>3.2.0</SteeltoeVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Steeltoe.CircuitBreaker.HystrixCore" Version="$(SteeltoeVersion)" />
+    <PackageReference Include="Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore" Version="$(SteeltoeVersion)" />
+  </ItemGroup>
+
+</Project>
