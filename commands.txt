@@ -18,3 +18,5 @@ docker run -d -v pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=password -
 npm run build:ssr
 docker run -d -p 8082:4000 sathyamurthyb4u/angular-ssr:1.1.0
 docker run -d --name mongodb -v mddata:/data/db -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=sample -e MONGO_INITDB_ROOT_PASSWORD=sample123! mongo
+
+docker-compose up --detach --scale redis-master=1 --scale redis-secondary=1

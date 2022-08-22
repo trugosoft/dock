@@ -1,9 +1,13 @@
 ﻿
+using System;
+using System.Text;
 using System.Collections.Generic;
-using JWT.Server.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
+using JWT.Server.Model;
+using JWT.Server.Middlewares.Cache;
 namespace JWT.Server.Controllers
 {
     [Authorize]
@@ -12,10 +16,13 @@ namespace JWT.Server.Controllers
     public class Authentication : ControllerBase
     {
         private readonly IAuthManager _authManager;
-
-        public Authentication(IAuthManager authManager)
+        private readonly MemoryCache _cache;
+        private readonly IDistributedCache _distributedCache;
+        public Authentication(IAuthManager authManager,MemCache memCache, IDistributedCache distributedCache)
         {
             _authManager = authManager;
+            _cache = memCache.Cache;
+            _distributedCache = distributedCache;
         }
 
         [HttpGet]
@@ -32,7 +39,15 @@ namespace JWT.Server.Controllers
             {
                 return Unauthorized();
             }
+            var cacheEntryOptions = new DistributedCacheEntryOptions()
+                // Keep in cache for this time, reset time if accessed.
+                .SetSlidingExpiration(TimeSpan.FromMinutes(30));
+
+
+            // Save data in redis cache.
+            _distributedCache.Set("user_name", Encoding.UTF8.GetBytes(userCredentials.UserName) , cacheEntryOptions);
             return Ok(token);
+
         }
     }
 }
