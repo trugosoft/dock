@@ -10,6 +10,7 @@ services:
   #             Prefect server              #
   # --------------------------------------#
   prefect-server:
+    container_name: prefect-server
     image: sathyamurthyb4u/prefect-local:2.0.1
     command:
       - prefect
@@ -32,6 +33,7 @@ services:
   #             Docker Agent              #
   # --------------------------------------#
   prefect-agent:
+    container_name: prefect-agent
     image: sathyamurthyb4u/prefect-local:2.0.1
     command:
       - prefect
@@ -42,7 +44,7 @@ services:
       prefect-server:
         condition: service_started
     environment:
-      PREFECT_API_URL: http://${PREFECT_IP}:4200/api
+      PREFECT_API_URL: http://${PREFECT_HOST}:4200/api
       PREFECT_LOGGING_LEVEL: DEBUG
       DOCKER_HOST: unix://var/run/docker.sock
     volumes:
@@ -53,6 +55,7 @@ services:
   #         Minio for storage             #
   # --------------------------------------#
   minio:
+    container_name: minio
     image: minio/minio
     environment:
       - MINIO_ROOT_USER=one!one!
