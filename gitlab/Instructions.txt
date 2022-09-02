@@ -1,0 +1,8 @@
+
+https://www.czerniga.it/2021/11/14/how-to-install-gitlab-using-docker-compose/
+
+To log in to GitLab for the first time, you need a temporary password, which is generated automatically during installation. We get the password using the command:
+
+> docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_password
+GitLab launching
+Our GitLab is available at: http: //localhost:8080. After going to this address, the following screen should appea
